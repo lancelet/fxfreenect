@@ -26,16 +26,20 @@ as follows:
     ```
     brew install git autoconf automake cmake maven sbt
     ```
-3. Clone the git repository:
+3. Clone the git repository and fetch its submodules (libusb and 
+libfrenect):
 
     ```
     cd <some_appropriate_directory_on_your_machine>
     git clone https://github.com/lancelet/fxfreenect.git
+    cd fxfreenect
+    git submodule init
+    git submodule update
     ```
 4. Build the native library and Java JNA wrapper:
 
     ```
-    cd fxfreenect/native-libs
+    cd native-libs
     ./build-osx.sh
     ```
 Then confirm that the required files are present in the `build/osx/lib` 
@@ -43,7 +47,7 @@ directory:
 
     ```
     ls build/osx/lib
-    freenect-0.0.1-SNAPSHOT.jar  libfreenect.0.1.2.dylib
+    >>> freenect-0.0.1-SNAPSHOT.jar  libfreenect.0.1.2.dylib
     cd ..
     ```
 Both the jar file and the dylib file must be present.
