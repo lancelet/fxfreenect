@@ -3,3 +3,5 @@ fxfreenect-viewer/target
 jfxfreenect/target
 project/target
 target
+.idea
+.idea_modules
