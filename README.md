@@ -22,6 +22,7 @@ StackOverflow explains how to install the developer tools.
 2. Install `git`, `autoconf`, `automake`, `cmake`, `maven` and `sbt`.  These
 tools can be installed using the [HomeBrew](http://brew.sh) package manager
 as follows:
+
 ```
 brew install git autoconf automake cmake maven sbt
 ```
