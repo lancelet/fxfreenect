@@ -6,17 +6,18 @@ initialize := {
   assert(specVersion == "1.8", "Java 1.8 is required to build and run.")
 }
 
-unmanagedBase := baseDirectory.value / "native-libs" / "build" / 
-  "osx" / "lib"
+val nativeLibDir = (new File("./native-libs/build/osx/lib")).getCanonicalFile()
 
 // JavaFX 8 libfreenect wrapper.
 lazy val jfxfreenect = project settings (
   version := Common.version,
-  scalaVersion := Common.buildScalaVersion
+  scalaVersion := Common.buildScalaVersion,
+  unmanagedBase := nativeLibDir
 )
 
 // Viewer application for JavaFX libfreenect data.
 lazy val `fxfreenect-viewer` = project settings (
   version := Common.version,
-  scalaVersion := Common.buildScalaVersion
+  scalaVersion := Common.buildScalaVersion,
+  unmanagedBase := nativeLibDir
 )
