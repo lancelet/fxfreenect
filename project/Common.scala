@@ -11,5 +11,6 @@ object Common {
   val buildScalaVersion = "2.11.0-M7"
 
   // dependencies
+  val jna = "net.java.dev.jna" % "jna" % "4.0.0"
 
 }

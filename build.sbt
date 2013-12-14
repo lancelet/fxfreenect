@@ -12,12 +12,18 @@ val nativeLibDir = (new File("./native-libs/build/osx/lib")).getCanonicalFile()
 lazy val jfxfreenect = project settings (
   version := Common.version,
   scalaVersion := Common.buildScalaVersion,
-  unmanagedBase := nativeLibDir
+  unmanagedBase := nativeLibDir,
+  libraryDependencies ++= List(
+    Common.jna
+  )
 )
 
 // Viewer application for JavaFX libfreenect data.
 lazy val `fxfreenect-viewer` = project settings (
   version := Common.version,
   scalaVersion := Common.buildScalaVersion,
-  unmanagedBase := nativeLibDir
+  unmanagedBase := nativeLibDir,
+  libraryDependencies ++= List(
+    Common.jna
+  )
 )
