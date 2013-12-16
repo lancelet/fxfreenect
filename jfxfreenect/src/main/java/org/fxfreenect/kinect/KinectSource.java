@@ -27,7 +27,7 @@ package org.fxfreenect.kinect;
 /**
  * Provides access to Kinect devices that are attached to the system.
  */
-public interface KinectSource {
+public interface KinectSource extends AutoCloseable {
 
     /**
      * Returns the number of attached Kinect devices.

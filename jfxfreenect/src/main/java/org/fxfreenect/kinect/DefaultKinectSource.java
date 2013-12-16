@@ -42,6 +42,10 @@ public class DefaultKinectSource implements KinectSource {
         return m_freenectKinectSource.getKinectNumber(index);
     }
 
+    public void close() {
+        m_freenectKinectSource.close();
+    }
+
     //--------------------------------------------------------------------------------------------------------- PRIVATE
 
     private FreenectKinectSource m_freenectKinectSource;

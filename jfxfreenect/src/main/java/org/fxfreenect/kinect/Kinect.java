@@ -26,7 +26,9 @@ package org.fxfreenect.kinect;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.scene.image.Image;
 import org.openkinect.freenect.LedStatus;
+import org.openkinect.freenect.Resolution;
 
 /**
  * Single Kinect device.
@@ -76,6 +78,56 @@ public interface Kinect extends AutoCloseable {
      * @return LED indicator status property
      */
     ObjectProperty<LedStatus> ledStatusProperty();
+
+
+    /**
+     * Returns an RGB image from the Kinect.
+     * <p>
+     * In order for the Kinect to have an image, the startVideo() method
+     * must be called.
+     * </p>
+     * @return current video image
+     */
+    Image getVideoImage();
+
+    /**
+     * Returns a stream of RGB images from the Kinect.
+     * <p>
+     * In order to receive images from the Kinect, the startVideo() method
+     * must be called.
+     * </p>
+     * @return video image property (stream of images)
+     */
+    ReadOnlyObjectProperty<Image> videoImageProperty();
+
+    /**
+     * Starts receiving video.
+     */
+    void startVideo();
+
+    /**
+     * Stops receiving video.
+     */
+    void stopVideo();
+
+
+    /**
+     * Returns the resolution of the video stream.
+     * @return resolution of the video stream
+     */
+    Resolution getVideoResolution();
+
+    /**
+     * Sets the resolution of the video stream.
+     * @param resolution resolution of the video stream
+     */
+    void setVideoResolution(Resolution resolution);
+
+    /**
+     * Returns the video resolution property.
+     * @return video resolution property
+     */
+    ObjectProperty<Resolution> videoResolutionProperty();
 
 }
 
