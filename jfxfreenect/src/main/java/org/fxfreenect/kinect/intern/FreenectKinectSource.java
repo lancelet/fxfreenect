@@ -22,24 +22,36 @@
  * Binary distributions must follow the binary distribution requirements of
  * either License.
  */
-package org.fxfreenect.kinect;
+package org.fxfreenect.kinect.intern;
 
-/**
- * Provides access to Kinect devices that are attached to the system.
- */
-public interface KinectSources {
+import com.sun.jna.NativeLibrary;
+import org.fxfreenect.kinect.Kinect;
+import org.fxfreenect.kinect.KinectSource;
+import org.openkinect.freenect.Context;
+import org.openkinect.freenect.Freenect;
 
-    /**
-     * Returns the number of attached Kinect devices.
-     * @return number of attached Kinects.
-     */
-    int getNumDevices();
+public final class FreenectKinectSource implements KinectSource {
 
-    /**
-     * Opens one of the attached Kinect devices.
-     * @param index number of the device to open
-     * @return opened Kinect device
-     */
-    Kinect getKinectNumber(int index);
+    static {
+        NativeLibrary.addSearchPath("freenect", "../native-libs/build/osx/lib/");
+    }
+
+    //---------------------------------------------------------------------------------------------------------- PUBLIC
+
+    public FreenectKinectSource() {
+        m_context = Freenect.createContext();
+    }
+
+    public int getNumDevices() {
+        return m_context.numDevices();
+    }
+
+    public Kinect getKinectNumber(int index) {
+        return new FreenectKinect(m_context.openDevice(index));
+    }
+
+    //--------------------------------------------------------------------------------------------------------- PRIVATE
+
+    private Context m_context;
 
 }

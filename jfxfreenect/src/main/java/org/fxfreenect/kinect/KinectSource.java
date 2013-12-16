@@ -24,10 +24,22 @@
  */
 package org.fxfreenect.kinect;
 
-import org.fxfreenect.kinect.intern.FreenectKinectSources;
+/**
+ * Provides access to Kinect devices that are attached to the system.
+ */
+public interface KinectSource {
 
-public final class KinectSourcesFactory {
-    public KinectSources getDefaultSources() {
-        return new FreenectKinectSources();
-    }
+    /**
+     * Returns the number of attached Kinect devices.
+     * @return number of attached Kinects.
+     */
+    int getNumDevices();
+
+    /**
+     * Opens one of the attached Kinect devices.
+     * @param index number of the device to open
+     * @return opened Kinect device
+     */
+    Kinect getKinectNumber(int index);
+
 }

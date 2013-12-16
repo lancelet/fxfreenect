@@ -22,36 +22,28 @@
  * Binary distributions must follow the binary distribution requirements of
  * either License.
  */
-package org.fxfreenect.kinect.intern;
+package org.fxfreenect.kinect;
 
-import com.sun.jna.NativeLibrary;
-import org.fxfreenect.kinect.Kinect;
-import org.fxfreenect.kinect.KinectSources;
-import org.openkinect.freenect.Context;
-import org.openkinect.freenect.Freenect;
+import org.fxfreenect.kinect.intern.FreenectKinectSource;
 
-public final class FreenectKinectSources implements KinectSources {
+public class DefaultKinectSource implements KinectSource {
 
     //---------------------------------------------------------------------------------------------------------- PUBLIC
 
-    public FreenectKinectSources() {
-        m_context = Freenect.createContext();
+    public DefaultKinectSource() {
+        m_freenectKinectSource = new FreenectKinectSource();
     }
 
     public int getNumDevices() {
-        return m_context.numDevices();
+        return m_freenectKinectSource.getNumDevices();
     }
 
     public Kinect getKinectNumber(int index) {
-        return new FreenectKinect(m_context.openDevice(index));
+        return m_freenectKinectSource.getKinectNumber(index);
     }
 
     //--------------------------------------------------------------------------------------------------------- PRIVATE
 
-    private Context m_context;
-
-    static {
-        NativeLibrary.addSearchPath("freenect", "native-libs/build/osx/lib/libfreenect.0.1.2.dylib");
-    }
+    private FreenectKinectSource m_freenectKinectSource;
 
 }
