@@ -11,18 +11,21 @@ import org.openkinect.freenect.LedStatus;
 object Test extends JFXApp {
 
   //System.setProperty("jna.debug_load", "true")
-  //NativeLibrary.addSearchPath("freenect", "../native-libs/build/osx/lib")
 
   val sources: KinectSource = new DefaultKinectSource()
-  val nDevices: Int = sources.getNumDevices()
-  if (nDevices > 0) {
-    println(s"$nDevices Kinect devices are attached")
-    val kinect: Kinect = sources.getKinectNumber(0)
-    kinect.setLedStatus(LedStatus.fromInt(LedStatus.BLINK_GREEN.intValue()))
-    println(kinect.getStatus)
-  } else {
-    println("No Kinect devices attached.")
+  val kinect: Option[Kinect] = {
+    val nDevices: Int = sources.getNumDevices()
+    if (nDevices > 0) {
+      println(s"$nDevices Kinect devices are attached.")
+      Some(sources.getKinectNumber(0))
+    } else {
+      println("No Kinect devices attached.")
+      None
+    }
   }
+
+  // set LED
+  for (k <- kinect) k.setLedStatus(LedStatus.fromInt(LedStatus.BLINK_GREEN.intValue))
 
   stage = new JFXApp.PrimaryStage {
     title = "Test"
@@ -30,4 +33,14 @@ object Test extends JFXApp {
     height = 450
     scene = new Scene { }
   }
+
+  override def stopApp() {
+    shutdownKinect()
+    super.stopApp()
+  }
+
+  private def shutdownKinect() {
+    for (k <- kinect) k.close()
+  }
+
 }
