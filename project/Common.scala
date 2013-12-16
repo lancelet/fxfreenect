@@ -7,7 +7,7 @@ import Keys._
 object Common {
 
   // scala version
-  val version = "0.1-SNAPSHOT"
+  val version = "0.1.1"
   val buildScalaVersion = "2.11.0-M7"
 
   // dependencies
