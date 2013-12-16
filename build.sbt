@@ -23,7 +23,17 @@ lazy val `fxfreenect-viewer` = project settings (
   version := Common.version,
   scalaVersion := Common.buildScalaVersion,
   unmanagedBase := nativeLibDir,
+  fork in run := true,
+  scalacOptions ++= List(
+    "-deprecation",
+    "-Xlog-reflective-calls",
+    "-Ywarn-adapted-args",
+    "-unchecked",
+    "-feature",
+    "-target:jvm-1.7"
+  ),
   libraryDependencies ++= List(
-    Common.jna
+    Common.jna,
+    Common.scalafx
   )
 )
