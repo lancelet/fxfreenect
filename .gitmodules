@@ -1,0 +1,6 @@
+[submodule "native-libs/libfreenect"]
+	path = native-libs/libfreenect
+	url = https://github.com/OpenKinect/libfreenect.git
+[submodule "native-libs/libusb"]
+	path = native-libs/libusb
+	url = git://git.libusb.org/libusb.git
