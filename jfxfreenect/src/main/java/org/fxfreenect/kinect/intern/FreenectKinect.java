@@ -45,6 +45,8 @@ public class FreenectKinect implements Kinect {
         m_device = null;
     }
 
+    public boolean isClosed() { return m_device == null; }
+
     public KinectStatus getStatus() { return m_status.getValue(); }
 
     public ReadOnlyObjectProperty<KinectStatus> statusProperty() { return m_status.getReadOnlyProperty(); }

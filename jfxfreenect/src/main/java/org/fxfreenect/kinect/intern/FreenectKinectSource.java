@@ -30,6 +30,9 @@ import org.fxfreenect.kinect.KinectSource;
 import org.openkinect.freenect.Context;
 import org.openkinect.freenect.Freenect;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class FreenectKinectSource implements KinectSource {
 
     static {
@@ -47,11 +50,44 @@ public final class FreenectKinectSource implements KinectSource {
     }
 
     public Kinect getKinectNumber(int index) {
-        return new FreenectKinect(m_context.openDevice(index));
+
+        // if the Kinect is already active and hasn't been closed, then return it
+        if (m_activeKinects.containsKey(index)) {
+            FreenectKinect kinect = m_activeKinects.get(index);
+            if (!kinect.isClosed()) {
+                return kinect;
+            } else {
+                m_activeKinects.remove(index);
+            }
+        }
+
+        // create a new Kinect object
+        FreenectKinect kinect = new FreenectKinect(m_context.openDevice(index));
+        m_activeKinects.put(index, kinect);
+        return kinect;
+
+    }
+
+    public void close() {
+
+        // shut down any active Kinects
+        for (FreenectKinect kinect : m_activeKinects.values()) {
+            if (!kinect.isClosed()) {
+                kinect.close();
+            }
+        }
+
+        // shut down the context and clean up
+        m_activeKinects.clear();
+        m_context.shutdown();
+        m_context = null;
+
     }
 
     //--------------------------------------------------------------------------------------------------------- PRIVATE
 
     private Context m_context;
+
+    private Map<Integer, FreenectKinect> m_activeKinects = new HashMap<>();
 
 }

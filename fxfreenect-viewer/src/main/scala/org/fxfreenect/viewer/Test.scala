@@ -40,7 +40,7 @@ object Test extends JFXApp {
   }
 
   private def shutdownKinect() {
-    for (k <- kinect) k.close()
+    sources.close()
   }
 
 }
