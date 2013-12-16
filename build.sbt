@@ -36,4 +36,6 @@ lazy val `fxfreenect-viewer` = project settings (
     Common.jna,
     Common.scalafx
   )
+) dependsOn (
+  jfxfreenect
 )
