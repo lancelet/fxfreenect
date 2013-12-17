@@ -128,6 +128,33 @@ public class FreenectKinect implements Kinect {
         return m_videoResolution;
     }
 
+    public Image getDepthImage() {
+        return null; // TODO:
+    }
+
+    public ReadOnlyObjectProperty<Image> depthImageProperty() {
+        return null; // TODO:
+    }
+
+    public void startDepth() {
+        // TODO:
+    }
+
+    public void stopDepth() {
+        // TODO:
+    }
+
+    public Resolution getDepthResolution() {
+        return null; // TODO:
+    }
+
+    public void setDepthResolution(Resolution resolution) {
+        // TODO:
+    }
+
+    public ObjectProperty<Resolution> depthResolutionProperty() {
+        return null; // TODO:
+    }
 
     //--------------------------------------------------------------------------------------------------------- PRIVATE
 

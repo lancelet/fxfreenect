@@ -129,5 +129,55 @@ public interface Kinect extends AutoCloseable {
      */
     ObjectProperty<Resolution> videoResolutionProperty();
 
+
+    /**
+     * Returns a stream of depth images from the Kinect.
+     * <p>
+     * In order to receive depth images from the Kinect, the startDepth()
+     * method must be called.
+     * </p>
+     * @return current depth image
+     */
+    Image getDepthImage();
+
+    /**
+     * Returns a property containing a stream of depth images from the Kinect.
+     * <p>
+     * In order to receive depth images from the Kinect, the startDepth()
+     * method must be called.
+     * </p>
+     * @return depth image property (stream of images)
+     */
+    ReadOnlyObjectProperty<Image> depthImageProperty();
+
+    /**
+     * Start receiving a stream of depth images from the Kinect.
+     */
+    void startDepth();
+
+    /**
+     * Stop receiving a stream of depth images from the Kinect.
+     */
+    void stopDepth();
+
+
+    /**
+     * Returns the resolution of the depth stream.
+     * @return resolution of the depth stream
+     */
+    Resolution getDepthResolution();
+
+    /**
+     * Sets the resolution of the depth stream.
+     * @param resolution resolution of the depth stream
+     */
+    void setDepthResolution(Resolution resolution);
+
+    /**
+     * Returns the depth resolution property.
+     * @return depth resolution property
+     */
+    ObjectProperty<Resolution> depthResolutionProperty();
+
 }
 
