@@ -10,14 +10,14 @@
 #  maven
 
 # Source paths.
-LIBUSB_SRC_DIR=$(pwd)/libusb
+LIBUSB_SRC_DIR=$(pwd)/libusbx
 LIBFREENECT_SRC_DIR=$(pwd)/libfreenect
 
 # Build paths.
 # These directories specify locations in which native files will be built.
 BUILD_DIR=$(pwd)/build
 BUILD_PREFIX=$BUILD_DIR/install-prefix
-BUILD_LIBUSB=$BUILD_DIR/build-libusb
+BUILD_LIBUSB=$BUILD_DIR/build-libusbx
 BUILD_LIBFREENECT=$BUILD_DIR/build-libfreenect
 BUILD_LIBFREENECT_JAVA=$BUILD_DIR/build-libfreenect-java
 BUILD_LIB=$BUILD_DIR/osx/lib
@@ -102,6 +102,7 @@ popd
 # Copy required libraries to their special location (BUILD_LIB).
 echo "=== COPYING LIBRARIES (to $BUILD_LIB) ==="
 cp $BUILD_PREFIX/lib/libfreenect.0.1.2.dylib $BUILD_LIB/.
+ln -s libfreenect.0.1.2.dylib $BUILD_LIB/libfreenect.dylib
 cp $BUILD_LIBFREENECT_JAVA/target/freenect-0.0.1-SNAPSHOT.jar $BUILD_LIB/.
 
 # Clean up
